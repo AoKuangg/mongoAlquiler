@@ -1,0 +1,332 @@
+use("db_alquiler_mongo");
+db.createCollection("sucursal", {
+  capped: true,
+  size: 1000,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "sucursal",
+      required: ["nombre", "direccion", "telefono"],
+      properties: {
+        nombre: {
+          bsonType: "string",
+        },
+        direccion: {
+          bsonType: "string",
+        },
+        telefono: {
+          bsonType: "string",
+          pattern: "^[0-9]{10}$",
+        },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.createCollection("automovil", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "automovil",
+      required: [
+        "marca",
+        "modelo",
+        "anio",
+        "tipo",
+        "capacidad",
+        "precio_diario",
+      ],
+      properties: {
+        marca: {
+          bsonType: "string",
+        },
+        modelo: {
+          bsonType: "string",
+        },
+        anio: {
+          bsonType: "int",
+          minimum: 2000,
+          maximum: 2070,
+        },
+        tipo: {
+          bsonType: "string",
+        },
+        capacidad: { bsonType: "int" },
+        precio_diario: { bsonType: "number" },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.createCollection("sucursal_automovil", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "automovil",
+      required: ["ID_sucursal", "ID_automovil", "cantidad_disponible"],
+      properties: {
+        ID_sucursal: {
+          bsonType: "objectId",
+        },
+        ID_automovil: {
+          bsonType: "objectId",
+        },
+        cantidad_disponible: {
+          bsonType: "int",
+        },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.createCollection("reserva", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "reserva",
+      required: [
+        "ID_cliente",
+        "ID_automovil",
+        "fecha_reserva",
+        "fecha_inicio",
+        "fecha_fin",
+        "estado",
+      ],
+      properties: {
+        ID_cliente: {
+          bsonType: "int",
+        },
+        ID_automovil: {
+          bsonType: "objectId",
+        },
+        fecha_reserva: {
+          bsonType: "string",
+        },
+        fecha_inicio: {
+          bsonType: "string",
+        },
+        fecha_fin: {
+          bsonType: "string",
+        },
+        estado: {
+          bsonType: "string",
+        },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.createCollection("cliente", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "reserva",
+      required: ["nombre", "apellido", "DNI", "direccion", "telefono", "email"],
+      properties: {
+        nombre: {
+          bsonType: "string",
+        },
+        apellido: {
+          bsonType: "string",
+        },
+        DNI: {
+          bsonType: "int",
+        },
+        direccion: {
+          bsonType: "string",
+        },
+        telefono: {
+          bsonType: "string",
+        },
+        email: {
+          bsonType: "string",
+          pattern: "^[a-zA-Z0-9.]+@",
+        },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.createCollection("alquiler", {
+  capped: true,
+  size: 1200,
+  max: 5,
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "alquiler",
+      required: [
+        "ID_cliente",
+        "ID_automovil",
+        "fecha_inicio",
+        "fecha_fin",
+        "costo_total",
+        "estado",
+      ],
+      properties: {
+        ID_cliente: {
+          bsonType: "int",
+        },
+        ID_automovil: {
+          bsonType: "objectId",
+        },
+        fecha_inicio: {
+          bsonType: "string",
+          maxLength: 10,
+        },
+        fecha_fin: {
+          bsonType: "string",
+          maxLength: 10,
+        },
+        costo_total: {
+          bsonType: "number",
+        },
+        estado: {
+          bsonType: "string",
+        },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.createCollection("registro_devolucion", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "registro_devolucion",
+      required: [
+        "ID_alquiler",
+        "ID_empleado",
+        "fecha_devolucion",
+        "combustible_entregado",
+        "kilometraje_entregado",
+      ],
+      properties: {
+        ID_alquiler: {
+          bsonType: "objectId",
+          description: "ID_alquiler no es valido",
+        },
+        ID_empleado: {
+          bsonType: "int",
+          description: "ID_empleado no es valido",
+        },
+        fecha_devolucion: {
+          bsonType: "string",
+          description: "fecha_devolucion no es valido",
+        },
+        combustible_entregado: {
+          bsonType: "number",
+          description: "combustible_entregado no es valido",
+        },
+        kilometraje_entregado: {
+          bsonType: "number",
+          description: "kilometraje_entregado no es valido",
+        },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.createCollection("empleado", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      title: "empleado",
+      required: ["nombre", "apellido", "DNI", "direccion", "telefono", "cargo"],
+      properties: {
+        nombre: {
+          bsonType: "string",
+          description: "nombre no es valido",
+        },
+        apellido: {
+          bsonType: "string",
+          description: "apellido no es valido",
+        },
+        DNI: {
+          bsonType: "int",
+          minimum: 100000000,
+          maximum: 9999999999,
+          description: "DNI no es valido",
+        },
+        direccion: {
+          bsonType: "string",
+          description: "direccion no es valido",
+        },
+        telefono: {
+          bsonType: "string",
+          description: "telefono no es valido",
+        },
+        cargo: {
+          bsonType: "string",
+          enum: ["Gerente", "Vendedor", "Asistente","Recepcionista","Chofer"],
+          description: "cargo no es valido",
+        },
+      },
+    },
+  },
+});
+use("db_alquiler_mongo");
+db.sucursal.insertMany([
+    { nombre: 'Sucursal A', direccion: 'Calle Principal 123', telefono: '1111111111' },
+    { nombre: 'Sucursal B', direccion: 'Avenida Central 456', telefono: '2222222222' },
+    {  nombre: 'Sucursal C', direccion: 'Plaza Principal 789', telefono: '3333333333' },
+    { nombre: 'Sucursal D', direccion: 'Ruta Secundaria 101', telefono: '4444444444' },
+    {  nombre: 'Sucursal E', direccion: 'Carretera Principal 987', telefono: '5555555555' }
+]);
+use("db_alquiler_mongo");
+db.automovil.insertMany([
+    { marca: 'Toyota', modelo: 'Corolla', anio: 2021, tipo: 'Sedan', capacidad: 5, precio_diario: 50.00 },
+    { marca: 'Honda', modelo: 'Civic', anio: 2020, tipo: 'Sedan', capacidad: 5, precio_diario: 45.00 },
+    { marca: 'Ford', modelo: 'Explorer', anio: 2019, tipo: 'SUV', capacidad: 7, precio_diario: 60.00 },
+    { marca: 'Chevrolet', modelo: 'Equinox', anio: 2022, tipo: 'SUV', capacidad: 5, precio_diario: 55.00 },
+    { marca: 'Nissan', modelo: 'Sentra', anio: 2022, tipo: 'Sedan', capacidad: 4, precio_diario: 48.00 }
+]);
+use("db_alquiler_mongo");
+db.sucursal_automovil.insertMany([
+    { ID_sucursal: ObjectId("64d69afc1be2f1e1427f9cba"),ID_automovil: ObjectId("64d69d484a92378ad0a07894"), cantidad_disponible: 3},
+    { ID_sucursal: ObjectId("64d69afc1be2f1e1427f9cbb"),ID_automovil: ObjectId("64d69d484a92378ad0a07895"), cantidad_disponible: 5},
+    { ID_sucursal: ObjectId("64d69afc1be2f1e1427f9cbc"),ID_automovil: ObjectId("64d69d484a92378ad0a07896"), cantidad_disponible: 2},
+    { ID_sucursal: ObjectId("64d69afc1be2f1e1427f9cbd"),ID_automovil: ObjectId("64d69d484a92378ad0a07897"), cantidad_disponible: 4},
+    { ID_sucursal: ObjectId("64d69afc1be2f1e1427f9cbe"),ID_automovil: ObjectId("64d69d484a92378ad0a07898"), cantidad_disponible: 1},
+]);
+use("db_alquiler_mongo");
+db.cliente.insertMany([
+    { nombre:"Juan", apellido:"Perez", DNI:12345678,direccion:"Calle 123",telefono:"11111111",email:"juan@example.com"},
+    { nombre:"Maria", apellido:"Lopez", DNI:87654321,direccion:"Avenida 456",telefono:"22222222",email:"maria@example.com"},
+    { nombre:"Pedro", apellido:"Gonzalez", DNI:56789012,direccion:"Plaza 789",telefono:"33333333",email:"pedro@example.com"},
+    { nombre:"Laura", apellido:"Martinez", DNI:09876543,direccion:"Ruta 101",telefono:"44444444",email:"laura@example.com"},
+    { nombre:"Carlos", apellido:"Gomez", DNI:43210987,direccion:"Calle 987",telefono:"55555555",email:"carlos@example.com"}    
+]);
+use("db_alquiler_mongo");
+db.reserva.insertMany([
+    { ID_cliente: 87654321, ID_automovil:ObjectId("64d69d484a92378ad0a07894"),fecha_reserva: "2023-07-06",fecha_inicio:"2023-07-10",fecha_fin:"2023-07-15",estado:"Pendiente"},
+    { ID_cliente: 56789012, ID_automovil:ObjectId("64d69d484a92378ad0a07896"),fecha_reserva: "2023-07-07",fecha_inicio:"2023-07-12",fecha_fin:"2023-07-17",estado:"Pendiente"},
+    { ID_cliente: 09876543, ID_automovil:ObjectId("64d69d484a92378ad0a07895"),fecha_reserva: "2023-07-08",fecha_inicio:"2023-07-14",fecha_fin:"2023-07-19",estado:"Pendiente"},
+    { ID_cliente: 43210987, ID_automovil:ObjectId("64d69d484a92378ad0a07897"),fecha_reserva: "2023-07-09",fecha_inicio:"2023-07-15",fecha_fin:"2023-07-20",estado:"Pendiente"},
+    { ID_cliente: 12345678, ID_automovil:ObjectId("64d69d484a92378ad0a07898"),fecha_reserva: "2023-07-10",fecha_inicio:"2023-07-16",fecha_fin:"2023-07-21",estado:"Pendiente"},
+]);
+use("db_alquiler_mongo");
+db.alquiler.insertMany([
+    {ID_cliente:12345678, ID_automovil:ObjectId("64d69d484a92378ad0a07896"),fecha_inicio:"2023-07-01",fecha_fin:"2023-07-05",costo_total:240.00,estado:"Activo"},
+    {ID_cliente:87654321, ID_automovil:ObjectId("64d69d484a92378ad0a07897"),fecha_inicio:"2023-07-02",fecha_fin:"2023-07-07",costo_total:275.00,estado:"Disponible"},
+    {ID_cliente:56789012, ID_automovil:ObjectId("64d69d484a92378ad0a07894"),fecha_inicio:"2023-07-03",fecha_fin:"2023-07-06",costo_total:150.00,estado:"Activo"},
+    {ID_cliente:09876543, ID_automovil:ObjectId("64d69d484a92378ad0a07898"),fecha_inicio:"2023-07-04",fecha_fin:"2023-07-08",costo_total:192.00,estado:"Activo"},
+    {ID_cliente:43210987, ID_automovil:ObjectId("64d69d484a92378ad0a07895"),fecha_inicio:"2023-07-05",fecha_fin:"2023-07-09",costo_total:225.00,estado:"Disponible"},
+]);
+use("db_alquiler_mongo");
+db.empleado.insertMany([
+    {nombre:"Ana",apellido:"Gomez",DNI:123456789,direccion:"Calle 111",telefono:"1111111111",cargo:"Gerente"},
+    {nombre:"Luis",apellido:"Rodriguez",DNI:987654321,direccion:"Avenida 222",telefono:"2222222222",cargo:"Asistente"},
+    {nombre:"Elena",apellido:"Fernandez",DNI:456789012,direccion:"Plaza 333",telefono:"3333333333",cargo:"Asistente"},
+    {nombre:"Mario",apellido:"Torres",DNI:210987654,direccion:"Ruta 444",telefono:"4444444444",cargo:"Recepcionista"},
+    {nombre:"Carlos",apellido:"Hernandez",DNI:543210987,direccion:"Carretera 555",telefono:"5555555555",cargo:"Chofer"},
+]);
+use("db_alquiler_mongo");
+db.registro_devolucion.insertMany([
+    {ID_alquiler: ObjectId("64d6a5c30e6081bd4f6eb8e4"),ID_empleado:456789012,fecha_devolucion:"2023-07-10",combustible_entregado:10.00,kilometraje_entregado:2500},
+    {ID_alquiler: ObjectId("64d6a5c30e6081bd4f6eb8e5"),ID_empleado:210987654,fecha_devolucion:"2023-07-12",combustible_entregado:15.00,kilometraje_entregado:2100},
+    {ID_alquiler: ObjectId("64d6a5c30e6081bd4f6eb8e6"),ID_empleado:123456789,fecha_devolucion:"2023-07-11",combustible_entregado:20.00,kilometraje_entregado:2300},
+    {ID_alquiler: ObjectId("64d6a5c30e6081bd4f6eb8e7"),ID_empleado:543210987,fecha_devolucion:"2023-07-13",combustible_entregado:25.00,kilometraje_entregado:2600},
+    {ID_alquiler: ObjectId("64d6a5c30e6081bd4f6eb8e8"),ID_empleado:987654321,fecha_devolucion:"2023-07-14",combustible_entregado:18.00,kilometraje_entregado:2000},
+]);
