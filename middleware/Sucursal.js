@@ -33,4 +33,4 @@ SucursalMiddleware.use(async (req, res, next) => {
     }
 });
 
-export { appMiddlewareSucursalVerify, proxySucursal };
+export { appMiddlewareSucursalVerify, SucursalMiddleware };

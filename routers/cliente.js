@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { connectDB } from "../db/conexion.js";
-import { limitRequests } from "../helpers/limit.js";
+import { connectDB } from "../db/conection.js";
+import { limitRequest } from "../config/limit.js";
 
 const Cliente = Router();
 let db = await connectDB();
 
-Cliente.use(limitRequests);
+Cliente.use(limitRequest);
 
 Cliente.get("/", async (req, res) => {
   try {

@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { connectDB } from "../db/conexion.js";
-import { limitRequests } from "../helpers/limit.js";
-import { validateJsonSize } from "../helpers/validarJson.js";
+import { connectDB } from "../db/conection.js";
+import { limitRequest } from "../config/limit.js";
+import { validateJsonSize } from "../config/validarJson.js";
 import { ObjectId } from "mongodb";
 import {
   appMiddlewareSucursalVerify,
-  proxySucursal,
-} from "../middleware/proxySucursal.js";
+  SucursalMiddleware,
+} from "../middleware/Sucursal.js";
 
 const Sucursal = Router();
 let db = await connectDB();
@@ -16,12 +16,12 @@ let db = await connectDB();
 // console.log(bandera);
 
 Sucursal.use(validateJsonSize);
-Sucursal.use(limitRequests);
+Sucursal.use(limitRequest);
 
 Sucursal.post(
   "/",
   appMiddlewareSucursalVerify,
-  proxySucursal,
+  SucursalMiddleware,
   async (req, res) => {
     const collection = db.collection("sucursal");
     await collection.insertOne(req.body);

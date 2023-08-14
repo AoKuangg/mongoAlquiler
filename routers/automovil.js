@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { connectDB } from "../db/conexion.js";
-import { limitRequests } from "../helpers/limit.js";
+import { connectDB } from "../db/conection.js";
+import { limitRequest } from "../config/limit.js";
 
 const Automovil = Router();
 let db = await connectDB();
 
-Automovil.use(limitRequests);
+Automovil.use(limitRequest);
 
 Automovil.get("/", async (req, res) => {
   try {
