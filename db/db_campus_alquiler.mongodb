@@ -330,3 +330,6 @@ db.registro_devolucion.insertMany([
     {ID_alquiler: ObjectId("64d6a5c30e6081bd4f6eb8e7"),ID_empleado:543210987,fecha_devolucion:"2023-07-13",combustible_entregado:25.00,kilometraje_entregado:2600},
     {ID_alquiler: ObjectId("64d6a5c30e6081bd4f6eb8e8"),ID_empleado:987654321,fecha_devolucion:"2023-07-14",combustible_entregado:18.00,kilometraje_entregado:2000},
 ]);
+
+use("db_alquiler_mongo");
+db.getCollection("alquiler").find({ fecha_inicio: { $gte: "2023-07-05", $lte: "2023-07-10" } })

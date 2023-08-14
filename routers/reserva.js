@@ -5,7 +5,7 @@ import { limitRequest } from "../config/limit.js";
 const Reserva = Router();
 let db = await connectDB();
 
-Reserva.use(limitRequest);
+Reserva.use(limitRequest());
 
 Reserva.get("/pendientes", async (req, res) => {
   try {
@@ -55,7 +55,7 @@ Reserva.get("/pendientes", async (req, res) => {
       .toArray();
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los automoviles",
       error: error,
     });
@@ -106,7 +106,7 @@ Reserva.get("/pendientes/:DNI", async (req, res) => {
       .toArray();
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los automoviles",
       error: error,
     });

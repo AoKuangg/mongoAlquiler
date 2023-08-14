@@ -16,7 +16,7 @@ let db = await connectDB();
 // console.log(bandera);
 
 Sucursal.use(validateJsonSize);
-Sucursal.use(limitRequest);
+Sucursal.use(limitRequest());
 
 Sucursal.post(
   "/",

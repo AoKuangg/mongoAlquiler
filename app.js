@@ -6,19 +6,19 @@ import Cliente from "./routers/cliente.js";
 import Reserva from "./routers/reserva.js";
 import Sucursal from "./routers/sucursal.js";
 import Empleado from "./routers/empleado.js";
-import { Verify_token,Generar_Token } from "./Jwt/token.js";
+import { appToken,appVerify } from "./Jwt/token.js"
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-app.use("/token",Generar_Token);
-app.use("/cliente",Verify_token,Cliente);
-app.use("/sucursal",Verify_token,Sucursal);
-app.use("/automovil",Verify_token,Automovil);
-app.use("/alquiler",Verify_token,Alquiler);
-app.use("/reserva",Verify_token,Reserva);
-app.use("/empleado",Verify_token,Empleado);
+app.use("/token",appToken);
+app.use("/cliente",appVerify,Cliente);
+app.use("/sucursal",appVerify,Sucursal);
+app.use("/automovil",appVerify,Automovil);
+app.use("/alquiler",appVerify,Alquiler);
+app.use("/reserva",appVerify,Reserva);
+app.use("/empleado",appVerify,Empleado);
 
 
 

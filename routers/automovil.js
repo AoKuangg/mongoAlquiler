@@ -5,7 +5,7 @@ import { limitRequest } from "../config/limit.js";
 const Automovil = Router();
 let db = await connectDB();
 
-Automovil.use(limitRequest);
+Automovil.use(limitRequest());
 
 Automovil.get("/", async (req, res) => {
   try {
@@ -32,7 +32,7 @@ Automovil.get("/", async (req, res) => {
       .toArray();
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los automoviles",
       error: error.message,
     });
@@ -45,7 +45,7 @@ Automovil.get("/capacidad", async (req, res) => {
     const data = await collection.find({ capacidad: { $gte: 5 } });
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los automoviles",
       error: error.message,
     });
@@ -62,7 +62,7 @@ Automovil.get("/sort", async (req, res) => {
     });
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los automoviles",
       error: error.message,
     });

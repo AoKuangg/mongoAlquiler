@@ -5,7 +5,7 @@ import { limitRequest } from "../config/limit.js";
 const Cliente = Router();
 let db = await connectDB();
 
-Cliente.use(limitRequest);
+Cliente.use(limitRequest());
 
 Cliente.get("/", async (req, res) => {
   try {
@@ -13,7 +13,7 @@ Cliente.get("/", async (req, res) => {
     const data = await collection.find().toArray();
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los clientes",
       error: error,
     });
@@ -22,12 +22,14 @@ Cliente.get("/", async (req, res) => {
 
 Cliente.get("/:dni", async (req, res) => {
   const { dni } = req.params;
+  const dninumero = parseInt(dni)
+  console.log(dni);
   try {
     const collection = db.collection("cliente");
-    const data = await collection.find({ DNI: dni }).toArray();
+    const data = await collection.find({ DNI: dninumero }).toArray();
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los clientes",
       error: error,
     });
@@ -74,7 +76,7 @@ Cliente.get("/", async (req, res) => {
       .toArray();
     res.send(data);
   } catch (error) {
-    es.status(500).json({
+    res.status(500).json({
       message: "Error al listar los clientes",
       error: error,
     });
