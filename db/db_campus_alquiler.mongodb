@@ -295,14 +295,14 @@ db.cliente.insertMany([
     { nombre:"Juan", apellido:"Perez", DNI:12345678,direccion:"Calle 123",telefono:"11111111",email:"juan@example.com"},
     { nombre:"Maria", apellido:"Lopez", DNI:87654321,direccion:"Avenida 456",telefono:"22222222",email:"maria@example.com"},
     { nombre:"Pedro", apellido:"Gonzalez", DNI:56789012,direccion:"Plaza 789",telefono:"33333333",email:"pedro@example.com"},
-    { nombre:"Laura", apellido:"Martinez", DNI:09876543,direccion:"Ruta 101",telefono:"44444444",email:"laura@example.com"},
+    { nombre:"Laura", apellido:"Martinez", DNI:9876543,direccion:"Ruta 101",telefono:"44444444",email:"laura@example.com"},
     { nombre:"Carlos", apellido:"Gomez", DNI:43210987,direccion:"Calle 987",telefono:"55555555",email:"carlos@example.com"}    
 ]);
 use("db_alquiler_mongo");
 db.reserva.insertMany([
     { ID_cliente: 87654321, ID_automovil:ObjectId("64d69d484a92378ad0a07894"),fecha_reserva: "2023-07-06",fecha_inicio:"2023-07-10",fecha_fin:"2023-07-15",estado:"Pendiente"},
     { ID_cliente: 56789012, ID_automovil:ObjectId("64d69d484a92378ad0a07896"),fecha_reserva: "2023-07-07",fecha_inicio:"2023-07-12",fecha_fin:"2023-07-17",estado:"Pendiente"},
-    { ID_cliente: 09876543, ID_automovil:ObjectId("64d69d484a92378ad0a07895"),fecha_reserva: "2023-07-08",fecha_inicio:"2023-07-14",fecha_fin:"2023-07-19",estado:"Pendiente"},
+    { ID_cliente: 9876543, ID_automovil:ObjectId("64d69d484a92378ad0a07895"),fecha_reserva: "2023-07-08",fecha_inicio:"2023-07-14",fecha_fin:"2023-07-19",estado:"Pendiente"},
     { ID_cliente: 43210987, ID_automovil:ObjectId("64d69d484a92378ad0a07897"),fecha_reserva: "2023-07-09",fecha_inicio:"2023-07-15",fecha_fin:"2023-07-20",estado:"Pendiente"},
     { ID_cliente: 12345678, ID_automovil:ObjectId("64d69d484a92378ad0a07898"),fecha_reserva: "2023-07-10",fecha_inicio:"2023-07-16",fecha_fin:"2023-07-21",estado:"Pendiente"},
 ]);
@@ -311,7 +311,7 @@ db.alquiler.insertMany([
     {ID_cliente:12345678, ID_automovil:ObjectId("64d69d484a92378ad0a07896"),fecha_inicio:"2023-07-01",fecha_fin:"2023-07-05",costo_total:240.00,estado:"Activo"},
     {ID_cliente:87654321, ID_automovil:ObjectId("64d69d484a92378ad0a07897"),fecha_inicio:"2023-07-02",fecha_fin:"2023-07-07",costo_total:275.00,estado:"Disponible"},
     {ID_cliente:56789012, ID_automovil:ObjectId("64d69d484a92378ad0a07894"),fecha_inicio:"2023-07-03",fecha_fin:"2023-07-06",costo_total:150.00,estado:"Activo"},
-    {ID_cliente:09876543, ID_automovil:ObjectId("64d69d484a92378ad0a07898"),fecha_inicio:"2023-07-04",fecha_fin:"2023-07-08",costo_total:192.00,estado:"Activo"},
+    {ID_cliente:9876543, ID_automovil:ObjectId("64d69d484a92378ad0a07898"),fecha_inicio:"2023-07-04",fecha_fin:"2023-07-08",costo_total:192.00,estado:"Activo"},
     {ID_cliente:43210987, ID_automovil:ObjectId("64d69d484a92378ad0a07895"),fecha_inicio:"2023-07-05",fecha_fin:"2023-07-09",costo_total:225.00,estado:"Disponible"},
 ]);
 use("db_alquiler_mongo");
