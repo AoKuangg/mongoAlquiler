@@ -1,8 +1,9 @@
 # Alquiler de Autos
-En este proyecto se realiza el filtro de alquiler de autos campus pero esta vez la base de datos se encuentra en mongodb
-### A CERCA DE LA BASE DE DATOS
+En este proyecto se realiza el filtro de alquiler de autos campus pero esta vez la base de datos se encuentra en mongodb.
 
-Ejemplo de la creación de la base de datos, recuerda siempre usar el USE de la DB en cada consulta y creación de colecciones.
+### Base de datos
+
+En laa creación de la base de datos, recuerda siempre usar el USE de la DB en cada consulta y creación de colecciones.
 
 ```bash
 use("db_alquiler_mongo")
@@ -17,10 +18,9 @@ Ejemplo de las colecciones creadas para la práctica.
 5. **alquiler:**
 6. **reserva:**
 7. **empleado:**
-8. **registro_entrega:**
-9. **registro_devolucion:**
+8. **registro_devolucion:**
 
-### CONSULTAS DEL TALLER
+### Consultas de el proyecto
 
 - _Listar todos los clientes registrados en la base de datos._
 - _Obtener todos los automóviles disponibles para alquiler._
