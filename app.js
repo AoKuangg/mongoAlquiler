@@ -1,12 +1,12 @@
 import dotenv from "dotenv";
 import express from "express";
-import Alquiler from "./routers/alquiler";
-import Automovil from "./routers/automovil";
-import Cliente from "./routers/cliente";
-import Reserva from "./routers/reserva";
-import Sucursal from "./routers/sucursal";
-import Empleado from "./routers/empleado";
-import { Verify_token,Generar_Token } from "./Jwt/token";
+import Alquiler from "./routers/alquiler.js";
+import Automovil from "./routers/automovil.js";
+import Cliente from "./routers/cliente.js";
+import Reserva from "./routers/reserva.js";
+import Sucursal from "./routers/sucursal.js";
+import Empleado from "./routers/empleado.js";
+import { Verify_token,Generar_Token } from "./Jwt/token.js";
 dotenv.config();
 
 const app = express();
